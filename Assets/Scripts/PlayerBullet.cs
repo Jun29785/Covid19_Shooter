@@ -11,7 +11,7 @@ public class PlayerBullet : MonoBehaviour
         
 
     float move;
-    float Timer = 1.0f;
+    float Timer = 0.5f;
     float CurrentTimer = 0.0f;
     
     private void Awake()
@@ -27,7 +27,7 @@ public class PlayerBullet : MonoBehaviour
 
     void Move()
     {
-        Debug.Log("Bullet Pos : " + transform.position);
+        //Debug.Log("Bullet Pos : " + transform.position);
         transform.position = new Vector2(transform.position.x, transform.position.y + move);
     }
     
