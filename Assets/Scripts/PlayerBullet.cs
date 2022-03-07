@@ -5,14 +5,15 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     [Header("BulletSpeed")]
-    [SerializeField] [Range(1f,10f)] private float BulletSpeed = 6.0f;
-    Rigidbody2D rb;
-    float Timer = 4.0f;
+    [SerializeField] [Range(1f,15f)] private float BulletSpeed = 6.0f;
+
+    float move;
+    float Timer = 1.0f;
     float CurrentTimer = 0.0f;
     
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        move = Time.deltaTime * BulletSpeed;
     }
 
     void Update()
@@ -24,7 +25,7 @@ public class PlayerBullet : MonoBehaviour
     void Move()
     {
         Debug.Log("Bullet Pos : " + transform.position);
-        rb.AddForce(Vector2.up * BulletSpeed);
+        transform.position = new Vector2(transform.position.x, transform.position.y + move);
     }
     
     void DestroyTimer()
