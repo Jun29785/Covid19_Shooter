@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    [Header("BulletSpeed")]
+    [Header("Bullet Speed")]
     [SerializeField] [Range(1f,15f)] private float BulletSpeed = 6.0f;
+
+    [Header("Bullet Type")]
+        
 
     float move;
     float Timer = 1.0f;

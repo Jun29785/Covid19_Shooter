@@ -9,4 +9,10 @@ public class Define
         Player,
         Enemy,
     }
+    public enum EnemyType
+    {
+        Left,
+        Center,
+        Right
+    }
 }
