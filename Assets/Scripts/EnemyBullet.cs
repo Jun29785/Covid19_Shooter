@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
+    public Vector2 Direction;
+
     void Start()
     {
         
@@ -11,6 +13,8 @@ public class EnemyBullet : MonoBehaviour
 
     void Update()
     {
-        
+        Vector2.MoveTowards(transform.position, Direction,10);
     }
+
+    
 }
