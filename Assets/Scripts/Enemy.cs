@@ -18,8 +18,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] [Range(0f, 100f)] float speed;
 
     [Header("Bullet Prefabs")]
-    GameObject[] Bullet;
+    public GameObject[] Bullet;
 
+    bool isEntered = false;
     Vector3 Center;
     Transform FirePos;
     public bool isFire = false;
@@ -28,16 +29,30 @@ public class Enemy : MonoBehaviour
     {
         if (type != EnemyType.Left_Bac && type != EnemyType.Right_Bac)
             FirePos = transform.GetChild(0);
+        else isEntered = true;
+        EnemyEnter();
     }
 
     void Update()
     {
-        Center = transform.parent.position;
+        if (type == EnemyType.Left_Bac || type == EnemyType.Right_Bac)
+            Center = transform.parent.position;
     }
 
     private void FixedUpdate()
     {
-        EnemyMove();
+        if (isEntered)
+            EnemyMove();
+    }
+
+    void EnemyEnter()
+    {
+        switch (type)
+        {
+            case EnemyType.Germ:
+                GermEnter();
+                break;
+        }
     }
 
     void EnemyMove()
@@ -63,21 +78,33 @@ public class Enemy : MonoBehaviour
         switch (type)
         {
             case EnemyType.Germ:
+                GermFire();
+                
                 break;
             default:
                 return;
         }
     }
 
+    void GermEnter()
+    {
+        var parent = transform.parent;
+        
+        Vector2 target = new Vector2(transform.position.x, 1.5f);
+        parent.position = Vector2.MoveTowards(transform.position,target,.1f);
+        if (parent.position.y < target.y)
+        {
+            Invoke("GermEnter", Time.deltaTime);
+            return;
+        }
+        Debug.Log("end");
+        EnemyFire();
+    }
+
     void GermFire()
     {
-        int term = 1;
-        for (int i = 0; i<5; i++)
-        {
-            GameObject obj = (GameObject)Instantiate(Bullet[0]);
-            obj.transform.position = FirePos.position;
-            obj.GetComponent<EnemyBullet>().Direction = new Vector2(GameManager.Instance.Map_Left + term,-10);
-        }
+        StopCoroutine(GermFireTiming());
+        StartCoroutine(GermFireTiming());       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -87,5 +114,22 @@ public class Enemy : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
         }
+    }
+
+    IEnumerator GermFireTiming()
+    { 
+        for (int i = 0, term = 1; i<7;i++, term += 3)
+        {
+            GameObject obj = (GameObject)Instantiate(Bullet[0]);
+            obj.transform.position = FirePos.position;
+            if (obj.transform.position.x >= 0)
+                obj.GetComponent<EnemyBullet>().Direction = new Vector2(GameManager.Instance.Map_Left + term, -10);
+            else
+                obj.GetComponent<EnemyBullet>().Direction = new Vector2(GameManager.Instance.Map_Right - term, -10);
+            yield return new WaitForSeconds(0.17f);
+        }
+
+        Invoke("GermFire", 5);
+        
     }
 }
