@@ -173,6 +173,6 @@ MonoBehaviour:
   type: 2
   speed: 100
   Bullet:
-  - {fileID: 5441927320157077484, guid: c797a24037195984d95174af500cea39, type: 3}
+  - {fileID: 8922719096037917275, guid: b7714c6ffc78faf44b9dec1605a34e8b, type: 3}
   isEntered: 0
   isFire: 0

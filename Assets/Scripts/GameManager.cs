@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 
     public float Map_Left = -9;
     public float Map_Right = 9;
+
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -13,6 +14,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        
+
     }
 }

@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
+        Center = transform.parent.position;
         if (type != EnemyType.Left_Bac && type != EnemyType.Right_Bac)
             FirePos = transform.GetChild(0);
         else isEntered = true;
@@ -87,10 +88,8 @@ public class Enemy : MonoBehaviour
 
     void GermEnter()
     {
-        Debug.Log("Entering");
-        
         Vector2 target = new Vector2(Center.x, 1.5f);
-        Center = Vector2.MoveTowards(Center,target,.1f);
+        transform.parent.position = Vector2.MoveTowards(Center,target,.1f);
         if (Center.y < target.y)
         {
             Invoke("GermEnter", Time.deltaTime);
@@ -145,6 +144,7 @@ public class Enemy : MonoBehaviour
         // Create Obj
         GameObject obj = (GameObject)Instantiate(Bullet[1]);
         obj.transform.position = FirePos.position;
+        //obj.GetComponent<EnemyBullet>().Target = 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

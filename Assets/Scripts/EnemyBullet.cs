@@ -37,7 +37,9 @@ public class EnemyBullet : Bullet
             case BulletFunction.Straight:
                 transform.position = Vector2.MoveTowards(transform.position, Target,0.1f);
                 break;
-
+            case BulletFunction.Follow:
+                transform.position = Vector2.MoveTowards(transform.position, Target, 0.07f);
+                break;
         }
     }
 
