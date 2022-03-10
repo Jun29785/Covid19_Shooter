@@ -1,16 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Define;
 
 public class Enemy : MonoBehaviour
 {
-    public enum EnemyType
-    {
-        Left_Bac,
-        Right_Bac,
-        Germ,
-        
-    };
+    
     [Header("Enemy Type")]
     public EnemyType type;
 
@@ -21,7 +16,7 @@ public class Enemy : MonoBehaviour
     public GameObject[] Bullet;
 
     public bool isEntered = false;
-    Vector3 Center;
+    Vector2 Center;
     Transform FirePos;
     public bool isFire = false;
 
@@ -35,7 +30,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (type == EnemyType.Left_Bac || type == EnemyType.Right_Bac)
             Center = transform.parent.position;
     }
 
@@ -52,6 +46,9 @@ public class Enemy : MonoBehaviour
             case EnemyType.Germ:
                 GermEnter();
                 break;
+            case EnemyType.Cancer:
+                CancerEnter();
+                break;
         }
     }
 
@@ -65,8 +62,6 @@ public class Enemy : MonoBehaviour
             case EnemyType.Right_Bac:
                 transform.RotateAround(Center, Vector3.back, speed * Time.fixedDeltaTime * 1);
                 break;
-            case EnemyType.Germ:
-                break;
             default:
                 break;
         }
@@ -79,25 +74,28 @@ public class Enemy : MonoBehaviour
         {
             case EnemyType.Germ:
                 GermFire();
-                
+                break;
+            case EnemyType.Cancer:
+
                 break;
             default:
                 return;
         }
     }
 
+    #region Germ
+
     void GermEnter()
     {
-        var parent = transform.parent;
+        Debug.Log("Entering");
         
-        Vector2 target = new Vector2(transform.position.x, 1.5f);
-        parent.position = Vector2.MoveTowards(transform.position,target,.1f);
-        if (parent.position.y < target.y)
+        Vector2 target = new Vector2(Center.x, 1.5f);
+        Center = Vector2.MoveTowards(Center,target,.1f);
+        if (Center.y < target.y)
         {
             Invoke("GermEnter", Time.deltaTime);
             return;
         }
-        Debug.Log("end");
         isEntered = true;
         EnemyFire();
     }
@@ -108,15 +106,6 @@ public class Enemy : MonoBehaviour
         StartCoroutine(GermFireTiming());       
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.transform.CompareTag("PlayerBullet"))
-        {
-            Destroy(collision.gameObject);
-            Destroy(this.gameObject);
-        }
-    }
-
     IEnumerator GermFireTiming()
     { 
         for (int i = 0, term = 1; i<7;i++, term += 3)
@@ -124,13 +113,46 @@ public class Enemy : MonoBehaviour
             GameObject obj = (GameObject)Instantiate(Bullet[0]);
             obj.transform.position = FirePos.position;
             if (obj.transform.position.x >= 0)
-                obj.GetComponent<EnemyBullet>().Direction = new Vector2(GameManager.Instance.Map_Left + term, -10);
+                obj.GetComponent<EnemyBullet>().Target = new Vector2(GameManager.Instance.Map_Left + term, -10);
             else
-                obj.GetComponent<EnemyBullet>().Direction = new Vector2(GameManager.Instance.Map_Right - term, -10);
+                obj.GetComponent<EnemyBullet>().Target = new Vector2(GameManager.Instance.Map_Right - term, -10);
             yield return new WaitForSeconds(0.17f);
         }
 
         Invoke("GermFire", 5);
         
+    }
+    
+    #endregion
+
+    void CancerEnter()
+    {
+        // 내려오기
+        Vector2 target = new Vector2(Center.x, 1.5f);
+        Center = Vector2.MoveTowards(Center, target, .1f);
+        if (Center.y > target.y)
+        {
+            Invoke("CancerEnter", Time.deltaTime);
+            return;
+        }
+        Debug.Log("end");
+        isEntered = true;
+        EnemyFire();
+    }
+
+    void CancerFire()
+    {
+        // Create Obj
+        GameObject obj = (GameObject)Instantiate(Bullet[1]);
+        obj.transform.position = FirePos.position;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("PlayerBullet"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 }

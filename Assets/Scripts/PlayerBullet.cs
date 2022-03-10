@@ -7,9 +7,6 @@ public class PlayerBullet : MonoBehaviour
     [Header("Bullet Speed")]
     [SerializeField] [Range(1f,15f)] private float BulletSpeed = 6.0f;
 
-    [Header("Bullet Type")]
-        
-
     float move;
     float Timer = 0.5f;
     float CurrentTimer = 0.0f;

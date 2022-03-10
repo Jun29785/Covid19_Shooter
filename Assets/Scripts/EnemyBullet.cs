@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Define;
 
-public class EnemyBullet : MonoBehaviour
+public class EnemyBullet : Bullet
 {
-    public Vector2 Direction;
+    public Vector2 Target;
 
-    float LifeTime = 3.0f;
+    float LifeTime = 5.0f;
     float Timer = 0;
 
     private void Awake()
@@ -31,8 +32,13 @@ public class EnemyBullet : MonoBehaviour
 
     void Move()
     {
-        Debug.Log("Current Pos : " + transform.position + "\nTarget : " + Direction);
-        transform.position = Vector2.MoveTowards(transform.position, Direction,0.1f);
+        switch(Function)
+        {
+            case BulletFunction.Straight:
+                transform.position = Vector2.MoveTowards(transform.position, Target,0.1f);
+                break;
+
+        }
     }
 
     void DestroyTimer()

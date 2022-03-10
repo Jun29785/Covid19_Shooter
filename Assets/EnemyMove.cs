@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Define;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -20,10 +21,10 @@ public class EnemyMove : MonoBehaviour
     {
         switch(em.type)
         {
-            case Enemy.EnemyType.Germ:
+            case EnemyType.Germ:
                 if (em.isEntered)
                 {
-                    transform.position = new Vector2(transform.position.x, transform.position.y + Time.deltaTime * 0.2f);
+                    transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, 7), 0.01f);
                 }
                 break;
             default: // left_bac, right_bac

@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Define
-{
+﻿namespace Define 
+{ 
+    public enum BulletFunction
+    {
+        Straight,
+        Follow
+    }
     public enum BulletType
     {
         Player,
@@ -11,8 +12,10 @@ public class Define
     }
     public enum EnemyType
     {
-        Left,
-        Center,
-        Right
-    }
+        Left_Bac,
+        Right_Bac,
+        Germ,
+        Cancer,
+
+    };
 }
