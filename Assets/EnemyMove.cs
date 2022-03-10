@@ -11,17 +11,24 @@ public class EnemyMove : MonoBehaviour
     }
     private void Update()
     {
-        if (transform.GetChildCount() == 0)
+        if (transform.childCount == 0)
         {
             Destroy(this.gameObject);
         }
     }
     private void FixedUpdate()
     {
-        if (em.type == Enemy.EnemyType.Germ)
+        switch(em.type)
         {
-            return;
+            case Enemy.EnemyType.Germ:
+                if (em.isEntered)
+                {
+                    transform.position = new Vector2(transform.position.x, transform.position.y + Time.deltaTime * 0.2f);
+                }
+                break;
+            default: // left_bac, right_bac
+                transform.position = new Vector2(transform.position.x, transform.position.y - Time.deltaTime * 0.2f);
+                break;
         }
-        transform.position = new Vector2(transform.position.x, transform.position.y - Time.deltaTime * 0.2f);
     }
 }

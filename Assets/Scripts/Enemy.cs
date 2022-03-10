@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     [Header("Bullet Prefabs")]
     public GameObject[] Bullet;
 
-    bool isEntered = false;
+    public bool isEntered = false;
     Vector3 Center;
     Transform FirePos;
     public bool isFire = false;
@@ -98,6 +98,7 @@ public class Enemy : MonoBehaviour
             return;
         }
         Debug.Log("end");
+        isEntered = true;
         EnemyFire();
     }
 
