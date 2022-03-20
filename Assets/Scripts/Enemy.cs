@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
 
     void GermEnter()
     {
-        Vector2 target = new Vector2(Center.x, 1.5f);
+        Vector2 target = new Vector2(Center.x, 0.7f);
         transform.parent.position = Vector2.MoveTowards(Center,target,.1f);
         if (Center.y < target.y)
         {
@@ -107,22 +107,24 @@ public class Enemy : MonoBehaviour
 
     IEnumerator GermFireTiming()
     { 
-        for (int i = 0, term = 1; i<7;i++, term += 3)
+        for (int i = 0, term = 1; i<7;i++, term += 4)
         {
             GameObject obj = (GameObject)Instantiate(Bullet[0]);
             obj.transform.position = FirePos.position;
             if (obj.transform.position.x >= 0)
-                obj.GetComponent<EnemyBullet>().Target = new Vector2(GameManager.Instance.Map_Left + term, -10);
+                obj.GetComponent<EnemyBullet>().Target = new Vector2(9 + term, -10);
             else
-                obj.GetComponent<EnemyBullet>().Target = new Vector2(GameManager.Instance.Map_Right - term, -10);
-            yield return new WaitForSeconds(0.17f);
+                obj.GetComponent<EnemyBullet>().Target = new Vector2(-9 - term, -10);
+            yield return new WaitForSeconds(0.07f);
         }
 
-        Invoke("GermFire", 5);
+        Invoke("GermFire", 2f);
         
     }
-    
+
     #endregion
+
+    #region Cancer
 
     void CancerEnter()
     {
@@ -146,6 +148,8 @@ public class Enemy : MonoBehaviour
         obj.transform.position = FirePos.position;
         //obj.GetComponent<EnemyBullet>().Target = 
     }
+
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -97,4 +97,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletType: 1
   Function: 0
-  Direction: {x: 0, y: 0}
+  moveSpeed: 0.6
+  Target: {x: 0, y: 0}

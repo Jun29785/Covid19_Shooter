@@ -98,6 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   speed: 100
+  Bullet: []
+  isEntered: 0
+  isFire: 0
 --- !u!61 &2701363245568849669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -220,3 +223,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c4bb32c50468c45aa247bdb5c41082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0.7

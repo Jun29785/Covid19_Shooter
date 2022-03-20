@@ -9,4 +9,7 @@ public class Bullet : MonoBehaviour
     public BulletType BulletType;
     [Header("Bullet Function")]
     public BulletFunction Function;
+    [Header("Bullet Speed")] [SerializeField] [Range(0f,5f)]
+    private float moveSpeed;
+    public float MoveSpeed { get { return moveSpeed; } }
 }

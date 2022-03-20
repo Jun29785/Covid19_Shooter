@@ -7,7 +7,7 @@ public class EnemyBullet : Bullet
 {
     public Vector2 Target;
 
-    float LifeTime = 5.0f;
+    float LifeTime = 3.0f;
     float Timer = 0;
 
     private void Awake()
@@ -17,7 +17,7 @@ public class EnemyBullet : Bullet
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -32,15 +32,7 @@ public class EnemyBullet : Bullet
 
     void Move()
     {
-        switch(Function)
-        {
-            case BulletFunction.Straight:
-                transform.position = Vector2.MoveTowards(transform.position, Target,0.1f);
-                break;
-            case BulletFunction.Follow:
-                transform.position = Vector2.MoveTowards(transform.position, Target, 0.07f);
-                break;
-        }
+        transform.Translate(Vector3.down * Time.fixedDeltaTime * MoveSpeed);
     }
 
     void DestroyTimer()
