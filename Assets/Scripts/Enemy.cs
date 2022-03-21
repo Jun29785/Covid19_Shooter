@@ -166,7 +166,7 @@ public class Enemy : MonoBehaviour
     void VirusEnter()
     {
         // 모든 방향으로 총알 발사
-
+            
     }
 
     void VirusFire()
