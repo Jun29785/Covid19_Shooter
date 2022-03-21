@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 2701363246733259966}
   - component: {fileID: 2701363246733259967}
   m_Layer: 0
-  m_Name: LeftEnemy
+  m_Name: LeftBacteriaEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

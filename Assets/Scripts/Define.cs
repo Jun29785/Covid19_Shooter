@@ -11,6 +11,12 @@
         Right_Bac,
         Germ,
         Cancer,
+        Virus
 
     };
+    public enum BulletFunction
+    {
+        FollowPlayer,
+        Straight
+    }
 }

@@ -50,6 +50,11 @@ public class Enemy : MonoBehaviour
             case EnemyType.Cancer:
                 CancerEnter();
                 break;
+            case EnemyType.Virus:
+                VirusEnter();
+                break;
+            default:
+                break;
         }
     }
 
@@ -65,8 +70,7 @@ public class Enemy : MonoBehaviour
                 break;
             default:
                 break;
-        }
-        
+        } 
     }
 
     void EnemyFire()
@@ -78,6 +82,9 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyType.Cancer:
                 CancerFire();
+                break;
+            case EnemyType.Virus:
+                VirusFire();
                 break;
             default:
                 return;
@@ -115,6 +122,7 @@ public class Enemy : MonoBehaviour
                 obj.transform.rotation = Quaternion.Euler(0, 0, term);
             else
                 obj.transform.rotation = Quaternion.Euler(0, 0, -term);
+            obj.GetComponent<EnemyBullet>().direction = Vector3.down;
             yield return new WaitForSeconds(0.07f);
         }
 
@@ -128,11 +136,8 @@ public class Enemy : MonoBehaviour
 
     void CancerEnter()
     {
-        // 내려오기
-        //Vector2 target = new Vector2(Center.x, 1.5f);
-        //Center = Vector2.MoveTowards(Center, target, .1f);\
         Center.Translate(Vector2.down * Time.deltaTime * speed);
-        if (/*Center.y > target.y*/Center.position.y > -1)
+        if (Center.position.y > -1)
         {
             Invoke("CancerEnter", Time.deltaTime);
             return;
@@ -147,12 +152,28 @@ public class Enemy : MonoBehaviour
         // Create Obj
         GameObject obj = (GameObject)Instantiate(Bullet[0]);
         obj.transform.position = FirePos.position;
-        obj.transform.rotation = Quaternion.rota(0,0,);
-        //obj.GetComponent<EnemyBullet>().Target = 
+        var player = PlayManager.Instance.Player;
+        obj.GetComponent<EnemyBullet>().SetDirection(
+            BulletFunction.FollowPlayer, 
+            obj.transform.position, 
+            player.transform.position);
+        Invoke("CancerFire", Random.Range(1.0f,2.5f));
     }
 
     #endregion
 
+    #region Virus
+    void VirusEnter()
+    {
+        // 모든 방향으로 총알 발사
+
+    }
+
+    void VirusFire()
+    {
+
+    }
+    #endregion
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("PlayerBullet"))

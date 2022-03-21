@@ -5,7 +5,11 @@ using Define;
 
 public class EnemyBullet : Bullet
 {
-    float LifeTime = 3.0f;
+    public Vector2 direction;
+
+    [Header("BulletLifeTime")][SerializeField][Range(0,5)]
+    private float lifeTime = 3.0f;
+    public float LifeTime { get { return lifeTime; } }
     float Timer = 0;
 
     private void Awake()
@@ -30,7 +34,17 @@ public class EnemyBullet : Bullet
 
     void Move()
     {
-        transform.Translate(Vector3.down * Time.fixedDeltaTime * MoveSpeed);
+        transform.Translate(direction * Time.fixedDeltaTime * MoveSpeed);
+    }
+
+    public void SetDirection(BulletFunction f, Vector2 obj, Vector2 target)
+    {
+        switch (f)
+        {
+            case BulletFunction.FollowPlayer:
+                direction = (target - obj).normalized;
+                break;
+        }
     }
 
     void DestroyTimer()
