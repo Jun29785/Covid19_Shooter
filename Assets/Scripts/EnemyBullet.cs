@@ -5,8 +5,6 @@ using Define;
 
 public class EnemyBullet : Bullet
 {
-    public Vector2 Target;
-
     float LifeTime = 3.0f;
     float Timer = 0;
 

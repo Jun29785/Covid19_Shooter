@@ -29,11 +29,11 @@ public class Tlqkf : MonoBehaviour
     
     void key()
     {
-        transform.Rotate(0, 0, Rotation);
+        transform.LookAt(PlayManager.Instance.Player.transform);
     }
 
     void front()
     {
-        transform.Translate(Vector3.up * Time.deltaTime * 10);
+        transform.Translate(Vector3.down * Time.deltaTime * 10);
     }
 }

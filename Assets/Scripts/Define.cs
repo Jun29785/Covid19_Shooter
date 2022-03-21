@@ -1,10 +1,5 @@
 ﻿namespace Define 
-{ 
-    public enum BulletFunction
-    {
-        Straight,
-        Follow
-    }
+{
     public enum BulletType
     {
         Player,

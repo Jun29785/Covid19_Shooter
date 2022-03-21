@@ -16,13 +16,13 @@ public class Enemy : MonoBehaviour
     public GameObject[] Bullet;
 
     public bool isEntered = false;
-    Vector2 Center;
+    Transform Center;
     Transform FirePos;
     public bool isFire = false;
 
     void Awake()
     {
-        Center = transform.parent.position;
+        Center = transform.parent;
         if (type != EnemyType.Left_Bac && type != EnemyType.Right_Bac)
             FirePos = transform.GetChild(0);
         else isEntered = true;
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-            Center = transform.parent.position;
+            Center = transform.parent;
     }
 
     private void FixedUpdate()
@@ -58,10 +58,10 @@ public class Enemy : MonoBehaviour
         switch (type)
         {
             case EnemyType.Left_Bac:
-                transform.RotateAround(Center, Vector3.back, speed * Time.fixedDeltaTime * -1);
+                transform.RotateAround(Center.position, Vector3.back, speed * Time.fixedDeltaTime * -1);
                 break;
             case EnemyType.Right_Bac:
-                transform.RotateAround(Center, Vector3.back, speed * Time.fixedDeltaTime * 1);
+                transform.RotateAround(Center.position, Vector3.back, speed * Time.fixedDeltaTime * 1);
                 break;
             default:
                 break;
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
                 GermFire();
                 break;
             case EnemyType.Cancer:
-
+                CancerFire();
                 break;
             default:
                 return;
@@ -88,9 +88,9 @@ public class Enemy : MonoBehaviour
 
     void GermEnter()
     {
-        Vector2 target = new Vector2(Center.x, 0.7f);
-        transform.parent.position = Vector2.MoveTowards(Center,target,.1f);
-        if (Center.y < target.y)
+        Vector2 target = new Vector2(Center.position.x, 0.7f);
+        transform.parent.position = Vector2.MoveTowards(Center.position,target,.1f);
+        if (Center.position.y < target.y)
         {
             Invoke("GermEnter", Time.deltaTime);
             return;
@@ -107,14 +107,14 @@ public class Enemy : MonoBehaviour
 
     IEnumerator GermFireTiming()
     { 
-        for (int i = 0, term = 1; i<7;i++, term += 4)
+        for (int i = 0, term = -90; i<7;i++, term += 30)
         {
             GameObject obj = (GameObject)Instantiate(Bullet[0]);
             obj.transform.position = FirePos.position;
             if (obj.transform.position.x >= 0)
-                obj.transform.Rotate(0, 0, 0);
+                obj.transform.rotation = Quaternion.Euler(0, 0, term);
             else
-                obj.GetComponent<EnemyBullet>().Target = new Vector2(-9 - term, -10);
+                obj.transform.rotation = Quaternion.Euler(0, 0, -term);
             yield return new WaitForSeconds(0.07f);
         }
 
@@ -129,9 +129,10 @@ public class Enemy : MonoBehaviour
     void CancerEnter()
     {
         // 내려오기
-        Vector2 target = new Vector2(Center.x, 1.5f);
-        Center = Vector2.MoveTowards(Center, target, .1f);
-        if (Center.y > target.y)
+        //Vector2 target = new Vector2(Center.x, 1.5f);
+        //Center = Vector2.MoveTowards(Center, target, .1f);\
+        Center.Translate(Vector2.down * Time.deltaTime * speed);
+        if (/*Center.y > target.y*/Center.position.y > -1)
         {
             Invoke("CancerEnter", Time.deltaTime);
             return;
@@ -144,8 +145,9 @@ public class Enemy : MonoBehaviour
     void CancerFire()
     {
         // Create Obj
-        GameObject obj = (GameObject)Instantiate(Bullet[1]);
+        GameObject obj = (GameObject)Instantiate(Bullet[0]);
         obj.transform.position = FirePos.position;
+        obj.transform.rotation = Quaternion.rota(0,0,);
         //obj.GetComponent<EnemyBullet>().Target = 
     }
 
