@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
             GameObject obj = (GameObject)Instantiate(Bullet[0]);
             obj.transform.position = FirePos.position;
             if (obj.transform.position.x >= 0)
-                obj.GetComponent<EnemyBullet>().Target = new Vector2(9 + term, -10);
+                obj.transform.Rotate(0, 0, 0);
             else
                 obj.GetComponent<EnemyBullet>().Target = new Vector2(-9 - term, -10);
             yield return new WaitForSeconds(0.07f);
