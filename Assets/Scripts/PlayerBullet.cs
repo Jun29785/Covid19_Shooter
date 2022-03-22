@@ -9,7 +9,7 @@ public class PlayerBullet : MonoBehaviour
     private float bulletSpeed;
     public float BulletSpeed { get { return bulletSpeed; } }
 
-    float Timer = 0.5f;
+    float Timer = 3f;
     float CurrentTimer = 0.0f;
     
     void Update()

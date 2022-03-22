@@ -164,7 +164,14 @@ public class Enemy : MonoBehaviour
     #region Virus
     void VirusEnter()
     {
-            
+        Center.transform.Translate(Vector3.down * speed * Time.deltaTime);
+        if (Center.transform.position.y > 5.7)
+        {
+            Invoke("VirusEnter", Time.deltaTime);
+            return;
+        }
+        isEntered = true;
+        VirusFire();
     }
 
     void VirusFire()
@@ -173,14 +180,18 @@ public class Enemy : MonoBehaviour
 
         for (int i = 0,angle = 360; i<12; i++,angle -= 30)
         {
-
+            GameObject obj = (GameObject)Instantiate(Bullet[0]);
+            obj.transform.position = FirePos.position;
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+            obj.GetComponent<EnemyBullet>().direction = Vector3.down;
         }
 
         // 다시 실행
-        Invoke("VirusFire", Random.Range(0.3f, 1.5f));
+        Invoke("VirusFire", Random.Range(1.0f, 2.0f));
     }
 
     #endregion
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("PlayerBullet"))

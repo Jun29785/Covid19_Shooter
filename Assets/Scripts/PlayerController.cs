@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [Header("Bullet Parent")]
     public Transform BulletParent;
 
+    private float FireCoolTime = 0;
+
     void Start()
     {
         
@@ -22,36 +24,47 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        InputKey();
         Fire();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        InputKey();
     }
 
     void InputKey()
     {
-        moveX = Input.GetAxisRaw("Horizontal") * MoveSpeed * Time.deltaTime;
-        moveY = Input.GetAxisRaw("Vertical") * MoveSpeed * Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        Vector2 direction =  new Vector2();
+        if (Input.GetKey(KeyCode.W))
         {
+            direction += Vector2.up;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            direction += Vector2.down;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            direction += Vector2.left;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            direction += Vector2.right;
+        }
+
+        transform.Translate(direction * MoveSpeed * Time.fixedDeltaTime);
+
+        if (Input.GetKey(KeyCode.Space) && !GameManager.Instance.IsFire)
+        {
+            FireCoolTime = 0;
             GameManager.Instance.IsFire = true;
         }
     }
 
-    void Move()
-    {
-       
-
-        transform.position = new Vector2(transform.position.x + moveX, transform.position.y + moveY);
-    }
-
     void Fire()
     {
-        if (GameManager.Instance.IsFire)
+        FireCoolTime += Time.deltaTime;
+        if (GameManager.Instance.IsFire && FireCoolTime > 0.2)
         {
             // Create Bullet
             GameObject obj = (GameObject)Instantiate(PlayerBulletPrefabs);

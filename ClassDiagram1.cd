@@ -38,7 +38,7 @@
   <Class Name="Enemy" Collapsed="true">
     <Position X="9.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAgAQAgAAAAAAIAQDAAAAAEATQQAAgAQAAAA4AEA=</HashCode>
+      <HashCode>AAQAAgAQAgAAAAAAICQDAAAAAEATQQAAgAQAAAA4AEA=</HashCode>
       <FileName>Assets\Scripts\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -101,7 +101,7 @@
   <Class Name="Tlqkf" Collapsed="true">
     <Position X="11.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAADAAAIAAAACEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAADAAAIAgACCEAAAAAABAAAAAAAAIAAAAAAA=</HashCode>
       <FileName>Assets\Tlqkf.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -335,7 +335,7 @@
   <Enum Name="Define.EnemyType" Collapsed="true">
     <Position X="9.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAoQ=</HashCode>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAoA=</HashCode>
       <FileName>Assets\Scripts\Define.cs</FileName>
     </TypeIdentifier>
   </Enum>
@@ -343,6 +343,13 @@
     <Position X="6" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Define.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Define.EnemyDirection" Collapsed="true">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAIAAA=</HashCode>
       <FileName>Assets\Scripts\Define.cs</FileName>
     </TypeIdentifier>
   </Enum>
