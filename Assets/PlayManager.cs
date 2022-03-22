@@ -14,6 +14,4 @@ public class PlayManager : MonoBehaviour
     {
         Instance = this;
     }
-
-
 }

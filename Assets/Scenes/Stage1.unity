@@ -630,6 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+  Direction: 0
   speed: 3.5
   Bullet:
   - {fileID: 4167397805175575602, guid: cec897346b92c5d4683599eea0ee833f, type: 3}

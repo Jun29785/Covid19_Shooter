@@ -7,13 +7,18 @@
     }
     public enum EnemyType
     {
-        Left_Bac,
-        Right_Bac,
+        Bacteria,
         Germ,
         Cancer,
         Virus
 
     };
+    public enum EnemyDirection
+    {
+        Left = -1,
+        Center = 0,
+        Right = 1
+    }
     public enum BulletFunction
     {
         FollowPlayer,

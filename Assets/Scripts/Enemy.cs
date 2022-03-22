@@ -5,9 +5,11 @@ using Define;
 
 public class Enemy : MonoBehaviour
 {
-    
     [Header("Enemy Type")]
     public EnemyType type;
+
+    [Header("Enemy Direction")]
+    public EnemyDirection Direction;
 
     [Header("Speed")]
     [SerializeField] [Range(0f, 100f)] float speed;
@@ -23,7 +25,7 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         Center = transform.parent;
-        if (type != EnemyType.Left_Bac && type != EnemyType.Right_Bac)
+        if (type != EnemyType.Bacteria)
             FirePos = transform.GetChild(0);
         else isEntered = true;
         EnemyEnter();
@@ -62,11 +64,8 @@ public class Enemy : MonoBehaviour
     {
         switch (type)
         {
-            case EnemyType.Left_Bac:
-                transform.RotateAround(Center.position, Vector3.back, speed * Time.fixedDeltaTime * -1);
-                break;
-            case EnemyType.Right_Bac:
-                transform.RotateAround(Center.position, Vector3.back, speed * Time.fixedDeltaTime * 1);
+            case EnemyType.Bacteria:
+                transform.RotateAround(Center.position, Vector3.back, speed * Time.fixedDeltaTime * (int)Direction);
                 break;
             default:
                 break;
@@ -165,14 +164,22 @@ public class Enemy : MonoBehaviour
     #region Virus
     void VirusEnter()
     {
-        // 모든 방향으로 총알 발사
             
     }
 
     void VirusFire()
     {
+        // 모든 방향으로 총알 발사
 
+        for (int i = 0,angle = 360; i<12; i++,angle -= 30)
+        {
+
+        }
+
+        // 다시 실행
+        Invoke("VirusFire", Random.Range(0.3f, 1.5f));
     }
+
     #endregion
     private void OnTriggerEnter2D(Collider2D collision)
     {
