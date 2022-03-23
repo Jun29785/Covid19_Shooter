@@ -24,4 +24,9 @@
         FollowPlayer,
         Straight
     }
+    public enum BossType
+    {
+        Covid,
+        Evolved_Covid
+    }
 }
