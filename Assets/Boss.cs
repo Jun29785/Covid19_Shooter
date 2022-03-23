@@ -15,6 +15,11 @@ public class Boss : MonoBehaviour
     private List<GameObject> enemys;
     public List<GameObject> Enemys { get { return enemys; } }
 
+    [Header("Bullet Parent")]
+    [SerializeField]
+    private Transform parent;
+    public Transform Parent { get { return parent; } }
+
     private void Awake()
     {
         // BossEnter
@@ -38,7 +43,7 @@ public class Boss : MonoBehaviour
         switch (Random.Range(1, 2))
         {
             case 1:
-                BossPattern1();
+                BossPattern3();
                 break;
         }
     }
@@ -52,11 +57,13 @@ public class Boss : MonoBehaviour
     void BossPattern2()
     {
         // 360도 방향으로 발사
+        CircleFire(BossBulletType.Straight);
     }
 
     void BossPattern3()
     {
         // 360도 방향으로 발사 밑 일정 시간 후 총알 플레이어한테 이동
+        CircleFire(BossBulletType.Return);
     }
 
     void BossPattern4()
@@ -69,11 +76,43 @@ public class Boss : MonoBehaviour
 
     }
 
+    void CircleFire(BossBulletType type)
+    {
+        switch (type)
+        {
+            case BossBulletType.Straight:
+                for (int i = 1; i <= 24; i++)
+                {
+                    GameObject obj = (GameObject)Instantiate(bullets[0]);
+                    obj.transform.position = transform.position;
+                    obj.transform.rotation = Quaternion.Euler(0, 0, i * 15);
+                    obj.transform.parent = Parent;
+                    obj.GetComponent<EnemyBullet>().direction = Vector3.down;
+                }
+                break;
+            case BossBulletType.Return:
+                for (int i = 1; i <= 12; i++)
+                {
+                    GameObject obj = (GameObject)Instantiate(bullets[0]);
+                    obj.transform.position = transform.position;
+                    obj.transform.rotation = Quaternion.Euler(0, 0, i * 30);
+                    obj.transform.parent = Parent;
+                    obj.GetComponent<EnemyBullet>().direction = Vector3.up;
+                    obj.GetComponent<EnemyBullet>().LifeTime = 6.0f;
+                    obj.GetComponent<EnemyBullet>().ReturnPlayer = true;
+                    obj.GetComponent<EnemyBullet>().MoveSpeed = 8f;
+                }   
+                break;
+        }
+        
+    }
+
     IEnumerator BowShapeBullet()
     {
         int a = 15;
-        for (int i = 0, term = -90; i < 12; i++, term += 15)
+        for (int i = 0, term = -90; i < 24; i++, term += 15)
         {
+            if (i > 12 && term > 60) term = -90;
             if (term < 90) a *= -1;
             GameObject obj = (GameObject)Instantiate(Bullets[0]);
             obj.transform.position = transform.position;

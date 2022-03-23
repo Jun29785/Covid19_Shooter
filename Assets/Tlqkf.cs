@@ -24,6 +24,7 @@ public class Tlqkf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.Translate(Dir * 1f * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.A))
         {
             key();
@@ -32,22 +33,16 @@ public class Tlqkf : MonoBehaviour
         {
             front();
         }
-        ZigZagTest();
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            t();
+        }
     }
 
-    void ZigZagTest()
+    void t()
     {
-        TimingTimer += Time.deltaTime;
-        if(TimingTimer > 1)
-        {
-            TimingTimer = 0;
-            Dir = Vector3.down;
-        }
-        else if(TimingTimer > .5)
-        {
-            Dir =  new Vector3((float)Direction,0,0);
-        }
-        transform.Translate(Dir * 2 * Time.deltaTime);
+        Dir = (PlayManager.Instance.Player.transform.position -
+            transform.position).normalized;
     }
     
     void key()

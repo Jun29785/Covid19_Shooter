@@ -29,4 +29,9 @@
         Covid,
         Evolved_Covid
     }
+    public enum BossBulletType
+    {
+        Straight,
+        Return
+    }
 }

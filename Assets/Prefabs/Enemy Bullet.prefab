@@ -98,3 +98,5 @@ MonoBehaviour:
   BulletType: 1
   moveSpeed: 2.95
   direction: {x: 0, y: 0}
+  lifeTime: 3
+  ReturnPlayer: 0
