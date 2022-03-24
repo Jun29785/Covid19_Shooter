@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Define;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Actor
 {
     [Header("Enemy Type")]
     public EnemyType type;

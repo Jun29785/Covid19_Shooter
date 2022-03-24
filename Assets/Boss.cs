@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : Actor
 {
     public BossType bossType;
 
@@ -68,12 +68,13 @@ public class Boss : MonoBehaviour
 
     void BossPattern4()
     {
-        // 랜덤한 적 생성
+        // 프리팹으로 지정해둔 적 패턴 생성
+
     }
 
     void BossPattern5()
     {
-
+        // 보스 자가 회복 체력의 20%
     }
 
     void CircleFire(BossBulletType type)
@@ -97,10 +98,11 @@ public class Boss : MonoBehaviour
                     obj.transform.position = transform.position;
                     obj.transform.rotation = Quaternion.Euler(0, 0, i * 30);
                     obj.transform.parent = Parent;
-                    obj.GetComponent<EnemyBullet>().direction = Vector3.up;
-                    obj.GetComponent<EnemyBullet>().LifeTime = 6.0f;
-                    obj.GetComponent<EnemyBullet>().ReturnPlayer = true;
-                    obj.GetComponent<EnemyBullet>().MoveSpeed = 8f;
+                    var bullet = obj.GetComponent<EnemyBullet>();
+                    bullet.direction = Vector3.up;
+                    bullet.LifeTime = 6.0f;
+                    bullet.ReturnPlayer = true;
+                    bullet.MoveSpeed = 8f;
                 }   
                 break;
         }

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Actor
 {
-    float moveX, moveY;
-
     [Header("Move Speed")]
     [SerializeField] [Range(1f,30f)]private float MoveSpeed = 10.0f;
 
@@ -34,20 +32,21 @@ public class PlayerController : MonoBehaviour
 
     void InputKey()
     {
+        // 이동 구역 제한 지정해야됨
         Vector2 direction =  new Vector2();
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && transform.position.y < 4.5)
         {
             direction += Vector2.up;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && transform.position.y > -4.5)
         {
             direction += Vector2.down;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && transform.position.x > -8.4)
         {
             direction += Vector2.left;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && transform.position.x < 8.4)
         {
             direction += Vector2.right;
         }

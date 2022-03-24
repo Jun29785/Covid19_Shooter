@@ -34,4 +34,11 @@
         Straight,
         Return
     }
+    public enum ItemType
+    {
+        Upgrade,
+        God,
+        Heal,
+        Pain
+    }
 }
