@@ -33,7 +33,12 @@ public class Enemy : Actor
 
     void Update()
     {
-            Center = transform.parent;
+        Center = transform.parent;
+        //Debug.Log(Hp);
+        if (Hp <= 0)
+        {
+            Destroy(transform.parent.gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -136,12 +141,11 @@ public class Enemy : Actor
     void CancerEnter()
     {
         Center.Translate(Vector2.down * Time.deltaTime * speed);
-        if (Center.position.y > -1)
+        if (Center.position.y > 1.7)
         {
             Invoke("CancerEnter", Time.deltaTime);
             return;
         }
-        Debug.Log("end");
         isEntered = true;
         EnemyFire();
     }
@@ -191,13 +195,10 @@ public class Enemy : Actor
     }
 
     #endregion
-    
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public void GetDamage(int dmg)
     {
-        if (collision.transform.CompareTag("PlayerBullet"))
-        {
-            Destroy(collision.gameObject);
-            Destroy(this.gameObject);
-        }
+        Hp -= dmg;
+        //Debug.Log("HP : " + Hp);
     }
 }

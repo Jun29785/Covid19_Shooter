@@ -467,7 +467,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnpoint: {fileID: 1812905258}
-  spawnGroup: []
+  spawnGroup:
+  - {fileID: 1729705092922945638, guid: b57567578d04f9744a814f2d7d704221, type: 3}
+  - {fileID: 9120900972777788658, guid: 0e024d0f37f2c7245b0acfa2bd44f230, type: 3}
   bossGroup: []
 --- !u!4 &522442007
 Transform:
@@ -538,7 +540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812905257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 522442007}
@@ -622,8 +624,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898156300}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.4, y: 4.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1570165288}
@@ -663,8 +665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6432bfa688ae82c47b980e48be76e663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  atk: 5
   MoveSpeed: 10.6
   PlayerBulletPrefabs: {fileID: 4553024586457923897, guid: ce6303a35057a8a468f0d7ecbc29dbc6,
     type: 3}

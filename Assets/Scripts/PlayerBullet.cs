@@ -32,4 +32,13 @@ public class PlayerBullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().GetDamage(GameManager.Instance.Atk);
+            Destroy(this.gameObject);
+        }
+    }
 }

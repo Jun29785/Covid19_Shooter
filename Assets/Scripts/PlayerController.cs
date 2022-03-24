@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : Actor
+public class PlayerController : MonoBehaviour
 {
     [Header("Move Speed")]
     [SerializeField] [Range(1f,30f)]private float MoveSpeed = 10.0f;

@@ -23,6 +23,7 @@ public class Spawner : MonoBehaviour
     {
         if (!GameManager.Instance.IsPhase)
         {
+            GameManager.Instance.IsPhase = true;
             if (GameManager.Instance.PhaseCount < 5)
                 SpawnEnemey();
             else
@@ -37,13 +38,12 @@ public class Spawner : MonoBehaviour
     {
         GameObject obj = (GameObject)Instantiate(SpawnGroup[Random.Range(0, SpawnGroup.Count)]);
         obj.transform.position = Spawnpoint.position;
-        GameManager.Instance.IsPhase = true;
+        GameManager.Instance.PhaseCount += 1;
     }
 
     void BossSpawn()
     {
         GameObject obj = (GameObject)Instantiate(BossGroup[(int)GameManager.Instance.stage]);
         obj.transform.position = Spawnpoint.position;
-        GameManager.Instance.IsPhase = true;
     }
 }

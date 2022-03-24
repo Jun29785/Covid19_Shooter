@@ -9,6 +9,7 @@ public class SpawnGroup : MonoBehaviour
         if (transform.childCount < 1)
         {
             GameManager.Instance.IsPhase = false;
+            Destroy(this.gameObject);
         }
     }
 }
