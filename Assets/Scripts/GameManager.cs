@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager>
 
     public Stage stage;
 
+    public bool IsCellSpwan;
+
     [Header("Player Stat")]
     [SerializeField]
     private int hp;
@@ -24,14 +26,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private int atk;
     public int Atk { get { return atk; } set { atk = value; } }
-    
+
     private void Awake()
     {
         DontDestroyOnLoad(this);
-    }
-
-    private void Update()
-    {
-
-    }
+    }   
 }

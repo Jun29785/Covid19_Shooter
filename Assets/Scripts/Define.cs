@@ -46,4 +46,9 @@
         Stage1 = 0,
         Stage2 = 1
     }
+    public enum CellType
+    {
+        White = 0,
+        Red = 1
+    }
 }
